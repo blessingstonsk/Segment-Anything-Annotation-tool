@@ -41,9 +41,6 @@ Click = namedtuple('Click', ['is_positive', 'coords'])
 from segment_anything import sam_model_registry, SamPredictor
 
 
-
-
-
 LABEL_COLORMAP = imgviz.label_colormap()
     
 class MainWindow(QtWidgets.QMainWindow):
@@ -56,6 +53,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.model_type = model_type
         self.keep_input_size = keep_input_size
         self.max_size = float(max_size)
+        
 
         self.setWindowTitle('NEVAR Systems')
 
@@ -124,7 +122,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.labelList.itemDropped.connect(self.labelOrderChanged)
 
         self.shape_dock = QDockWidget(
-            self.tr("Polygon Labels"), self
+            self.tr("Labels"), self
         )
         self.shape_dock.setObjectName("Labels")
         self.shape_dock.setWidget(self.labelList)
