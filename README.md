@@ -1,4 +1,4 @@
-# segment-anything-annotator
+# Segment-Anything-Annotation-tool
 We've crafted a Python UI leveraging Labelme and Segment-Anything for precise pixel-level annotation. Our tool facilitates the creation of multiple masks through SAM prompts (box/point), enables efficient polygon editing, and maintains a comprehensive record of categories. Moving forward, we're excited to integrate CLIP-based techniques for enhanced category proposal and incorporate VOS methods to streamline mask association in video datasets.
 
 ## Features
