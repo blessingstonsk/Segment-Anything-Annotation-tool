@@ -50,14 +50,16 @@ class MainWindow(QtWidgets.QMainWindow):
     
     FIT_WINDOW, FIT_WIDTH, MANUAL_ZOOM = 0, 1, 2
     
-    def __init__(self, parent=None, global_w=1000, global_h=1600, model_type='vit_h', keep_input_size=True, max_size=720):
+    def __init__(self, parent=None, global_w=1000, global_h=1800, model_type='vit_h', keep_input_size=True, max_size=1080):
         super(MainWindow, self).__init__(parent)
         self.resize(global_w, global_h)
         self.model_type = model_type
         self.keep_input_size = keep_input_size
-        self.max_size = max_size
+        self.max_size = float(max_size)
 
         self.setWindowTitle('NEVAR Systems')
+
+        # Set the window icon
         self.setWindowIcon(QIcon("Nevarlogo.png")) 
 
         self.canvas = Canvas(self,
@@ -1395,7 +1397,7 @@ def get_parser():
     )
     parser.add_argument(
         "--model_type",
-        default='vit_b',
+        default='vit_h',
     )
     parser.add_argument(
         "--keep_input_size",
