@@ -16,6 +16,7 @@ import base64
 
 from PyQt5.QtWidgets import QWidget, QApplication, QMainWindow, QApplication, QPushButton, QLabel, QFileDialog, QProgressBar, QComboBox, QScrollArea, QDockWidget, QMessageBox
 from PyQt5.QtGui import QPixmap, QIcon, QImage
+from PyQt5.QtGui import QIcon
 from PyQt5.Qt import QSize
 from qtpy.QtCore import Qt
 from qtpy import QtCore
@@ -44,11 +45,11 @@ from segment_anything import sam_model_registry, SamPredictor
 
 
 LABEL_COLORMAP = imgviz.label_colormap()
-
-class MainWindow(QMainWindow):
-
+    
+class MainWindow(QtWidgets.QMainWindow):
+    
     FIT_WINDOW, FIT_WIDTH, MANUAL_ZOOM = 0, 1, 2
-
+    
     def __init__(self, parent=None, global_w=1000, global_h=1800, model_type='vit_b', keep_input_size=True, max_size=1080):
         super(MainWindow, self).__init__(parent)
         self.resize(global_w, global_h)
@@ -56,7 +57,11 @@ class MainWindow(QMainWindow):
         self.keep_input_size = keep_input_size
         self.max_size = float(max_size)
 
-        self.setWindowTitle('segment-anything-annotator')
+        self.setWindowTitle('NEVAR Systems')
+
+        # Set the window icon
+        self.setWindowIcon(QIcon("Nevarlogo.png")) 
+
         self.canvas = Canvas(self,
             epsilon=10.0,
             double_click='close',
@@ -153,16 +158,16 @@ class MainWindow(QMainWindow):
         self.img_progress_bar.setMinimum(0)
         self.img_progress_bar.setMaximum(1)
         self.img_progress_bar.setValue(0)
-        self.button_proposal1 = QPushButton('Proposal1', self)
+        self.button_proposal1 = QPushButton('Version 1', self)
         self.button_proposal1.clicked.connect(self.choose_proposal1)
         self.button_proposal1.setShortcut('1')
-        self.button_proposal2 = QPushButton('Proposal2', self)
+        self.button_proposal2 = QPushButton('Version 2', self)
         self.button_proposal2.clicked.connect(self.choose_proposal2)
         self.button_proposal2.setShortcut('2')
-        self.button_proposal3 = QPushButton('Proposal3', self)
+        self.button_proposal3 = QPushButton('Version 3', self)
         self.button_proposal3.clicked.connect(self.choose_proposal3)
         self.button_proposal3.setShortcut('3')
-        self.button_proposal4 = QPushButton('Proposal4', self)
+        self.button_proposal4 = QPushButton('Version 4', self)
         self.button_proposal4.clicked.connect(self.choose_proposal4)
         self.button_proposal4.setShortcut('4')
         self.button_proposal_list = [self.button_proposal1, self.button_proposal2, self.button_proposal3, self.button_proposal4]
