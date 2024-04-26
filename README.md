@@ -1,53 +1,48 @@
-# Segment-Anything-Annotation-tool
-We've crafted a Python UI leveraging Labelme and Segment-Anything model from Meta AI for precise pixel-level annotation. Our tool facilitates the creation of multiple masks through SAM prompts (box/point), enables efficient polygon editing, and maintains a comprehensive record of categories. Moving forward, we're excited to integrate CLIP-based techniques for enhanced category proposal and incorporate VOS methods to streamline mask association in video datasets.
+# Segment-Anything Annotation Tool
+This Python-based user interface harnesses the power of Labelme and the Segment-Anything model from Meta AI to achieve precise pixel-level annotation. Our tool offers a seamless workflow for creating multiple masks through SAM prompts (including boxes and points), efficient polygon editing, and comprehensive category management. Looking ahead, we're excited to integrate CLIP-based techniques for enhanced category proposal and incorporate VOS methods to streamline mask association in video datasets.
 
-## Features
-- [x] Interactive Segmentation by SAM (both boxes and points prompt)
-- [x] Multiple Output Choices
-- [x] Category Annotation
-- [x] Polygon modification
-- [ ] CLIP for Category Proposal
-- [x] STCN for Video Dataset Annotation
+## Key Features
+- [x] Interactive Segmentation with SAM (supports both boxes and points prompts)
+- [x] Flexible Output Options
+- [x] Category Annotation Capability
+- [x] Intuitive Polygon Editing
+- [ ] Integration of CLIP for Category Proposal
+- [x] Integration of STCN for Video Dataset Annotation
 
-## Installation
-  1. Python>=3.8
-  2. [Pytorch](https://pytorch.org/)
-  3. pip install -r requirements.txt
+## Installation Requirements
+1. Python version 3.8 or higher
+2. [PyTorch](https://pytorch.org/)
+3. Execute `pip install -r requirements.txt`
 
-## Usage
-### 1. Start the Annotation Platform
+## How to Use
+### 1. Launch the Annotation Platform
 
+```bash
+py annotator.py 
 ```
-python annotator.py --app_resolution 1000,1600 --model_type vit_h --keep_input_size True --max_size 720
-```
-`--model_type`: vit_b, vit_l, vit_h
 
-`--keep_input_size`: `True`: keep the origin image size for SAM; `False`: resize the input image to `--max_size` (save GPU memory)
+### 2. Load the Category List File
+If you wish to annotate object categories, click on `Category File` in the top toolbar and select your desired file, such as `categories.txt` provided in this repository.
 
-### 2. Load the category list file if you want to annotate object categories.
-Click the `Category File` on the top tool bar and choose your own one, such as the `categories.txt` in this repo.
-
-### 3. Specify the image and save folds
-Click the 'Image Directory' on the top tool bar to specify the fold containing images (in .jpg or .png).
-Click the 'Save Directory' on the top tool bar to specify the fold for saving the annotations. The annotations of each image will be saved as json file in the following format
-```
+### 3. Specify Image and Save Folders
+Click on `Image Directory` in the top toolbar to specify the folder containing images (in .jpg or .png format).
+Similarly, click on `Save Directory` in the top toolbar to specify the folder for saving the annotations. Each image's annotations will be saved as a JSON file in the following format:
+```json
 [
-  #object1
   {
-      'label':<category>, 
-      'group_id':<id>,
-      'shape_type':'polygon',
-      'points':[[x1,y1],[x2,y2],[x3,y3],...]
+    "label": "<category>",
+    "group_id": <id>,
+    "shape_type": "polygon",
+    "points": [[x1, y1], [x2, y2], [x3, y3], ...]
   },
-  #object2
   ...
 ]
 ```
 
-### 4. Load SAM model
-Click the "Load SAM" on the top tool bar to load the SAM model. The model will be automatically downloaded at the first time. Please be patient. Or you can manually download the [models](https://github.com/facebookresearch/segment-anything#model-checkpoints) and put them in the root directory named `vit_b.pth`, `vit_l.pth` and `vit_h.pth`.
+### 4. Load the SAM Model
+Download the required [models](https://github.com/facebookresearch/segment-anything#model-checkpoints) and place them in the root directory named `vit_b.pth`, `vit_l.pth`, and `vit_h.pth`. Then, click on `Load SAM` in the top toolbar to load the SAM model.
 
-### 5. Annotating Functions
+### 5. Annotation Functions
 `Manual Polygons`: manually add masks by clicking on the boundary of the objects, just like the Labelme (Press right button and drag to draw the arcs easily).
 
 `Point Prompt`: generate mask proposals with clicks. The mouse leftpress/rightpress represent positive/negative clicks respectively.
@@ -72,9 +67,9 @@ annotation dock. And you can modify the boundary by draging the points on the bo
 
 `Class On/Off`: if the Class is turned on, a dialog will show after you accept a mask to record category and id, or the catgeory will be default value "Object".
 
-
 ## Video Usage
-### 1. clone [STCN](https://github.com/hkchengrex/STCN), download the [stcn.pth](https://drive.google.com/file/d/1mRrE0uCI2ktdWlUgapJI_KmgeIiF2eOm/view) and put them in the root directory like this:
+### 1. Clone STCN
+Clone the [STCN repository](https://github.com/hkchengrex/STCN), download the [stcn.pth](https://drive.google.com/file/d/1mRrE0uCI2ktdWlUgapJI_KmgeIiF2eOm/view), and place them in the root directory as shown:
 ```
 -| segment-anything-annotator
     -| annotation_video.py
@@ -84,16 +79,15 @@ annotation dock. And you can modify the boundary by draging the points on the bo
 ```
 
 ### 2. Start the Annotation Platform
-```
+```bash
 python annotator_video.py --app_resolution 1000,1600 --model_type vit_b --keep_input_size True --max_size 720 --max_size_STCN 600
 ```
-`--model_type`: vit_b, vit_l, vit_h
-`--keep_input_size`: `True`: keep the origin image size for SAM; `False`: resize the input image to `--max_size` (save GPU memory)
-`--max_size_STCN`: the maximum input image size for STCN (don't be too large) 
+- `--model_type`: Choose from `vit_b`, `vit_l`, or `vit_h`.
+- `--keep_input_size`: Set to `True` to keep the original image size for SAM, or `False` to resize the input image to `--max_size` (to save GPU memory).
+- `--max_size_STCN`: Specify the maximum input image size for STCN.
 
-### 3. Specify the video and save folds
-Click 'Video Directory' and 'Save Directory'.
-The folds containing videos should be structured like this:
+### 3. Specify the Video and Save Folders
+Click on `Video Directory` and `Save Directory`. The video folders should have the following structure:
 ```
 -| video_fold
     -| video1
@@ -105,31 +99,27 @@ The folds containing videos should be structured like this:
         -| 00001.jpg     
     ...
 ```
-### 3. Load STCN and SAM
-Click 'Load STCN' and 'Load SAM'.
 
-### 4. Video Annotating Functions
-(a) Finish the annotations of the first frame with SAM
+### 4. Load STCN and SAM
+Click on `Load STCN` and `Load SAM`.
 
-(b) Press and hold `left control`, then press `left mouse button` to select the objects you want to track (should be highlighted by colors)
-
-(c) Click `add object to memory` to initialize the tracklets
-
-(d) move to next frame, and click `Propagate` to obtain tracked masks on new frame. (the results will be automatically saved when you change frames)
-
-(e) if the propagated masks are not good enough, press 'e' to enter Edit mode, then you could manually correct the masks. You could also use `Add as key frame` to add a certain frame as reference to improve the propagation stability.
-
-ShortCuts: `b`: `last frame`, `n`: `next frame`, `e`: `edit model`, `a`: `accept proposal`, `r`: `reject proposal`, `d`: `delete`, `s`: `save`, `space`: `propagate`
-
-
+### 5. Video Annotation Functions
+- **Finish Annotations**: Complete annotations for the first frame with SAM.
+- **Object Selection**: Press and hold `left control`, then click `left mouse button` to select objects to track.
+- **Add Object to Memory**: Initialize tracklets by clicking `Add object to memory`.
+- **Frame Navigation**: Move to the next or previous frame using `n` and `b` shortcuts.
+- **Propagate**: Obtain tracked masks for new frames by clicking `Propagate`.
+- **Edit Mode**: Press 'e' to enter edit mode and manually correct masks.
+- **Shortcuts**: Various shortcuts available for efficient annotation (e.g., 'a' for accept proposal, 'r' for reject proposal, 'd' for delete, 's' for save, 'space' for propagate).
 
 ## To Do
-- [ ] CLIP for Category Proposal
-- [x] STCN for Video Dataset Annotation
-- [ ] Fix bugs and optimize the UI
-- [ ] Annotation Files -> Labelme Format/COCO Format/Youtube-VIS Format
+- [ ] Integration of CLIP for Category Proposal
+- [x] Integration of STCN for Video Dataset Annotation
+- [ ] Bug Fixes and UI Optimizations
+- [ ] Support for Various Annotation File Formats (e.g., Labelme, COCO, Youtube-VIS)
 
 ## Acknowledgement 
-This repo is built on [SAM](https://github.com/facebookresearch/segment-anything) and [Labelme]().
+This repository is built upon the Segment anything model and Labelme projects.
 
-
+##NOTE
+**Feel free to contribute your ideas to this repo** 
