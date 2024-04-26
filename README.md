@@ -1,14 +1,6 @@
 # segment-anything-annotator
-We developed a python UI based on labelme and segment-anything for pixel-level annotation. It support generating multiple masks by SAM(box/point prompt),  efficient polygon modification and category record. We will add more features (such as incorporating CLIP-based methods for category proposal and VOS methods for mask association of video datasets)
+We've crafted a Python UI leveraging Labelme and Segment-Anything for precise pixel-level annotation. Our tool facilitates the creation of multiple masks through SAM prompts (box/point), enables efficient polygon editing, and maintains a comprehensive record of categories. Moving forward, we're excited to integrate CLIP-based techniques for enhanced category proposal and incorporate VOS methods to streamline mask association in video datasets.
 
-Any feedback or suggestions are welcomed. We will continuously add features and fix bugs. 👀👀👀
-
-
-## News
-`28 Apr`: Change the output format with labelme format. If you want to use the old output format, please use `backup/annotator.py`.
-
-`21 Apr`: Add annotation script for video dataset. See [Video Usage](https://github.com/haochenheheda/segment-anything-annotator#video-usage) for the details.
-<img src="demo_jntm.gif" alt="VIdeo_Demo" width="720" height="480">
 ## Features
 - [x] Interactive Segmentation by SAM (both boxes and points prompt)
 - [x] Multiple Output Choices
