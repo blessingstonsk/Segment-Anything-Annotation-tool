@@ -10,7 +10,7 @@ This Python-based user interface harnesses the power of Labelme and the Segment-
 - [x] Integration of STCN for Video Dataset Annotation
 
 ## Installation Requirements
-1. Python version 3.8 or higher
+1. Python version 3.10 or higher
 2. [PyTorch](https://pytorch.org/)
 3. Execute `pip install -r requirements.txt`
 
