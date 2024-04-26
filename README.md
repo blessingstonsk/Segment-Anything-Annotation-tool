@@ -9,9 +9,6 @@ We've crafted a Python UI leveraging Labelme and Segment-Anything model from Met
 - [ ] CLIP for Category Proposal
 - [x] STCN for Video Dataset Annotation
 
-## Demo
-<img src="demo.gif" alt="Demo" width="720" height="480">
-
 ## Installation
   1. Python>=3.8
   2. [Pytorch](https://pytorch.org/)
